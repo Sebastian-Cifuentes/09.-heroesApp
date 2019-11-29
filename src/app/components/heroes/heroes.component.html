@@ -1,0 +1,61 @@
+<h1> Listado de Heroes </h1>
+<hr>
+
+<div class="row animated fadeIn fast">
+    <div class="col-md-12 text-right">
+        <button [routerLink]="['/heroe','new']" class="btn btn-success" type="button" name="nuevo">
+      <i class="fa fa-plus"></i>
+      Nuevo héroe
+    </button>
+    </div>
+</div>
+<br>
+
+<div class="row animated fadeIn fast">
+    <div class="col-md-12">
+        <div class="table-responsive">
+            <table class="table table-hover animated fadeIn faster">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Nombre</th>
+                        <th>Poder</th>
+                        <th>Vivo</th>
+                        <th class="text-right">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let k of heroes | keys; let i = index">
+                        <th>{{ i + 1 }}</th>
+                        <th>{{ heroes[k].nombre }}</th>
+                        <th>{{ heroes[k].casa }}</th>
+                        <th>Vivo</th>
+                        <th class="text-right w230">
+                            <button [routerLink]="['/heroe', k]" class="btn btn-outline-success">
+                Editar
+              </button>
+                            <button (click)="borrarHeroe(k)" class="btn btn-outline-danger">
+                Eliminar
+              </button>
+                        </th>
+                    </tr>
+                </tbody>
+            </table>
+            <div *ngIf="(heroes | keys).length === 0 && loading" class="alert alert-warning text-center mt-3" role="alert">
+                <h4 class="alert-heading">No hay registros que mostrar</h4>
+                <p>
+                    <i class="fa fa-exclamation fa-2x"></i>
+                </p>
+            </div>
+            <div *ngIf="!loading" class="alert alert-info text-center mt-3" role="alert">
+                <h4 class="alert-heading">Cargando</h4>
+                <p>
+                    <i class="fa fa-sync-alt fa-spin fa-2x"></i>
+                </p>
+                <p class="mb-0">
+                    Espere por favor
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
